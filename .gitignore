@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+venv/
+.env
+.DS_Store
+.idea/
+.vscode/
+# ถ้า best.pt ใหญ่เกิน 100MB ต้องใส่บรรทัดล่างนี้ด้วย ไม่งั้น push ไม่ผ่าน
+# best.pt
