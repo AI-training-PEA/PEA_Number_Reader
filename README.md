@@ -13,7 +13,7 @@
 
 ## 1.function download_image_from_url
 
-```
+```python
     def download_image_from_url(url: str) -> bytes:
         """ฟังก์ชันแยกสำหรับการดาวน์โหลด"""
         response = session.get(url, timeout=10)
