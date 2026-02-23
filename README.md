@@ -1,3 +1,14 @@
+# ตัวอย่าง API ที่ใช้เรียก
+
+```bash
+    curl --request POST \
+    --url http://127.0.0.1:8000/predict \
+    --header 'content-type: application/json' \
+    --data '{
+    "url": "https://webservice.pea.co.th/SurveyImage/BPNL/202601_BPNL_219_A3_BPNL0005_6601379771_020009421021.jpg"
+    }'
+```
+
 # อธิบายฟังก์ชั่นต่างๆ
 
 ## 2.function decode_image_bytes
