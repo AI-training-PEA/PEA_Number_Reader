@@ -1135,11 +1135,15 @@ def preprocess_image(img_cv2: np.ndarray) -> np.ndarray:
 ทำการโหลดไฟล์โมเดล YOLO (.pt) เข้าสู่หน่วยความจำของระบบตั้งแต่ตอนเริ่มรันเซิร์ฟเวอร์ พร้อมระบบจัดการ Error (Exception Handling) เพื่อแจ้งเตือนหากไฟล์โมเดลสูญหาย
 
 ```python
-def download_image_from_url(url: str) -> bytes:
-    """ฟังก์ชันแยกสำหรับการดาวน์โหลด"""
-    response = session.get(url, timeout=10)
-    response.raise_for_status()
-    return response.content
+def load_yolo_model(path: str):
+    try:
+        if os.path.exists(path):
+            return YOLO(path)
+        print(f"❌ Warning: Model file not found at {path}")
+        return None
+    except Exception as e:
+        print(f"❌ Error loading YOLO: {e}")
+        return None
 ```
 
 </details>
