@@ -1056,6 +1056,7 @@ if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
 ```
+
 </details>
 
 <details>
@@ -1074,6 +1075,7 @@ if __name__ == "__main__":
             raise ValueError('URL must start with http:// or https://')
         return v
 ```
+
 </details>
 
 <details>
@@ -1088,6 +1090,7 @@ def download_image_from_url(url: str) -> bytes:
     response.raise_for_status()
     return response.content
 ```
+
 </details>
 
 <details>
@@ -1104,6 +1107,7 @@ def decode_image_bytes(image_content: bytes) -> np.ndarray:
         raise ValueError("Decoded image is None")
     return img_np
 ```
+
 </details>
 
 <details>
@@ -1122,6 +1126,7 @@ def preprocess_image(img_cv2: np.ndarray) -> np.ndarray:
     except Exception:
         return img_cv2
 ```
+
 </details>
 
 <details>
@@ -1136,6 +1141,7 @@ def download_image_from_url(url: str) -> bytes:
     response.raise_for_status()
     return response.content
 ```
+
 </details>
 
 <details>
@@ -1179,6 +1185,7 @@ def detect_and_read_meter(img_np: np.ndarray, model: Any) -> Tuple[Optional[str]
                 
     return None, None
 ```
+
 </details>
 
 <details>
@@ -1208,5 +1215,6 @@ def read_text_from_crop(img_crop: np.ndarray) -> Tuple[Optional[str], Optional[s
         
     return None, None
 ```
+
 </details>
 
