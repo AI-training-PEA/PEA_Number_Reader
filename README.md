@@ -993,6 +993,7 @@ url='https://webservice.pea.co.th/SurveyImage/BPNL/202601_BPNL_219_A3_BPNL0005_6
 
 <details>
 <summary><span style="font-size: 1.5em; color: #c1dfff;"><b>process_meter_reading</b></span></summary>
+
 เป็น API Endpoint หลัก (/predict) ที่ควบคุมลำดับการทำงาน (Pipeline) ทั้งหมด ทำหน้าที่รับ Request เข้ามา สั่งการฟังก์ชันอื่นๆ ตามลำดับขั้นตอน และรวบรวมผลลัพธ์เพื่อส่งกลับ (Response) ในรูปแบบ JSON
 
 ```python
@@ -1059,6 +1060,7 @@ if __name__ == "__main__":
 
 <details>
 <summary><span style="font-size: 1.5em; color: #c1dfff;"><b>validate_url</b></span></summary>
+
 เป็นฟังก์ชันตรวจสอบ (Validator) ของ Pydantic ใช้สำหรับกรองข้อมูล URL ที่ผู้ใช้อัปโหลดเข้ามา โดยบังคับว่าต้องไม่เป็นค่าว่าง และต้องขึ้นต้นด้วย http:// หรือ https:// เท่านั้น เพื่อป้องกัน Error ในขั้นตอนดาวน์โหลด
 
 ```python
@@ -1076,6 +1078,7 @@ if __name__ == "__main__":
 
 <details>
 <summary><span style="font-size: 1.5em; color: #c1dfff;"><b>download_image_from_url</b></span></summary>
+
 รับค่า URL และทำการดาวน์โหลดรูปภาพผ่าน HTTP Request โดยมีการตั้งค่า Timeout และคืนค่ากลับมาเป็นข้อมูลไฟล์ภาพดิบ (Bytes)
 
 ```python
@@ -1089,6 +1092,7 @@ def download_image_from_url(url: str) -> bytes:
 
 <details>
 <summary><span style="font-size: 1.5em; color: #c1dfff;"><b>decode_image_bytes</b></span></summary>
+
 นำข้อมูล Bytes ที่ได้จากการดาวน์โหลด มาแปลง (Decode) ให้เป็นโครงสร้างข้อมูล Numpy Array เพื่อให้ไลบรารี OpenCV สามารถนำรูปภาพนี้ไปประมวลผลต่อได้
 
 ```python
@@ -1104,6 +1108,7 @@ def decode_image_bytes(image_content: bytes) -> np.ndarray:
 
 <details>
 <summary><span style="font-size: 1.5em; color: #c1dfff;"><b>preprocess_image</b></span></summary>
+
 ปรับปรุงคุณภาพของรูปภาพ (Image Enhancement) ก่อนส่งเข้ากระบวนการสกัดอักษร โดยจะแปลงภาพให้เป็นสีขาวดำ (Grayscale) และเร่งความเปรียบต่าง (Contrast) เพื่อลดจุดรบกวนและทำให้ตัวเลขคมชัดขึ้น
 
 ```python
@@ -1121,6 +1126,7 @@ def preprocess_image(img_cv2: np.ndarray) -> np.ndarray:
 
 <details>
 <summary><span style="font-size: 1.5em; color: #c1dfff;"><b>load_yolo_model</b></span></summary>
+
 ทำการโหลดไฟล์โมเดล YOLO (.pt) เข้าสู่หน่วยความจำของระบบตั้งแต่ตอนเริ่มรันเซิร์ฟเวอร์ พร้อมระบบจัดการ Error (Exception Handling) เพื่อแจ้งเตือนหากไฟล์โมเดลสูญหาย
 
 ```python
@@ -1134,6 +1140,7 @@ def download_image_from_url(url: str) -> bytes:
 
 <details>
 <summary><span style="font-size: 1.5em; color: #c1dfff;"><b>detect_and_read_meter</b></span></summary>
+
 นำรูปภาพเต็มส่งเข้าโมเดล YOLO เพื่อค้นหาพิกัด (Bounding Box) ของหน้าปัดมิเตอร์ จากนั้นเรียงลำดับผลลัพธ์ตามค่าความมั่นใจ (Confidence) ทำการตัดภาพ (Crop) เฉพาะส่วนหน้าปัด และส่งไปอ่านค่าตัวเลข
 
 ```python
@@ -1176,6 +1183,7 @@ def detect_and_read_meter(img_np: np.ndarray, model: Any) -> Tuple[Optional[str]
 
 <details>
 <summary><span style="font-size: 1.5em; color: #c1dfff;"><b>read_text_from_crop</b></span></summary>
+
 ถอดรหัสตัวเลขจากภาพที่ถูกตัดมา (Crop) โดยใช้กลยุทธ์แบบ 2 ขั้นตอน คือ พยายามอ่านจาก Barcode ก่อนเนื่องจากมีความแม่นยำสูง หากไม่สำเร็จจึงจะสลับไปใช้ EasyOCR ในการสกัดตัวอักษรแทน
 
 ```python
