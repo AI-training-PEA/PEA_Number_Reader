@@ -1056,6 +1056,21 @@ if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
 ```
+### input :
+
+```
+ImageInput(url='https://webservice.pea.co.th/SurveyImage/BPNL/202601_BPNL_219_A3_BPNL0005_6601379771_020009421021.jpg')
+```
+
+### output :
+
+```
+{
+    "status": "success",
+    "step": "finished",
+    "data": {"serial_number": "6601379771", "method": "ocr"}
+}
+```
 
 </details>
 
@@ -1075,6 +1090,17 @@ if __name__ == "__main__":
             raise ValueError('URL must start with http:// or https://')
         return v
 ```
+### input :
+
+```
+'  https://webservice.pea.co.th/SurveyImage/BPNL/202601_BPNL_219_A3_BPNL0005_6601379771_020009421021.jpg  '
+```
+
+### output :
+
+```
+'https://webservice.pea.co.th/SurveyImage/BPNL/202601_BPNL_219_A3_BPNL0005_6601379771_020009421021.jpg'
+```
 
 </details>
 
@@ -1089,6 +1115,18 @@ def download_image_from_url(url: str) -> bytes:
     response = session.get(url, timeout=10)
     response.raise_for_status()
     return response.content
+```
+### input :
+
+```
+'https://webservice.pea.co.th/SurveyImage/BPNL/202601_BPNL_219_A3_BPNL0005_6601379771_020009421021.jpg'
+```
+
+### output :
+
+```
+# ข้อมูลรูปภาพในรูปแบบ bytes (len: 132028)
+b'\xff\xd8\xff\xe0\x00\x10JFIF...'
 ```
 
 </details>
@@ -1106,6 +1144,17 @@ def decode_image_bytes(image_content: bytes) -> np.ndarray:
     if img_np is None:
         raise ValueError("Decoded image is None")
     return img_np
+```
+### input :
+
+```
+image_content (bytes, len: 132028)
+```
+
+### output :
+
+```
+img_np.shape: (500, 375, 3) # Numpy array ของรูปภาพ
 ```
 
 </details>
@@ -1126,6 +1175,17 @@ def preprocess_image(img_cv2: np.ndarray) -> np.ndarray:
     except Exception:
         return img_cv2
 ```
+### input :
+
+```
+img_cv2.shape: (37, 132, 3) # ภาพส่วนที่ Crop มา (ตัวอย่าง Box ที่ 2)
+```
+
+### output :
+
+```
+output_np shape: (37, 132) # ภาพ Grayscale ที่เร่ง Contrast แล้ว
+```
 
 </details>
 
@@ -1144,6 +1204,17 @@ def load_yolo_model(path: str):
     except Exception as e:
         print(f"❌ Error loading YOLO: {e}")
         return None
+```
+### input :
+
+```
+'best.pt'
+```
+
+### output :
+
+```
+<class 'ultralytics.models.yolo.model.YOLO'> # YOLO Model Object
 ```
 
 </details>
@@ -1189,6 +1260,17 @@ def detect_and_read_meter(img_np: np.ndarray, model: Any) -> Tuple[Optional[str]
                 
     return None, None
 ```
+### input :
+
+```
+img_np.shape: (500, 375, 3), model: <YOLO Object>
+```
+
+### output :
+
+```
+('6601379771', 'ocr')
+```
 
 </details>
 
@@ -1218,6 +1300,17 @@ def read_text_from_crop(img_crop: np.ndarray) -> Tuple[Optional[str], Optional[s
         return valid_numbers[0], "ocr"
         
     return None, None
+```
+### input :
+
+```
+img_crop.shape: (37, 132, 3) # ส่วนที่ครอบตัวเลขมิเตอร์
+```
+
+### output :
+
+```
+('6601379771', 'ocr')
 ```
 
 </details>
